@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!--
+        視需要在下方的中繼標籤中自訂內容安全性原則。將 'unsafe-inline' 加入 default-src 以啟用內嵌 JavaScript。
+        如需詳細資料，請參閱 http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/my_uploads.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-1.12.1.js" integrity="sha256-VuhDpmsr9xiKwvTIHfYWCIQ84US9WqZsLfR4P7qF6O8=" crossorigin="anonymous"></script>
+
+    <title>BlankCordovaApp7</title>
+
+</head>
+<body>
+
+
+    <br><br><br><br>
+    <center>
+
+        <p style="font-size:18px;">照片選取</p>
+        <form id="photofile" aaction="http://140.123.112.44/timetreasure/public/youtube/upload" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type='file' class="upl" id="user_icon_file" name="user_icon_file" placeholder="上傳圖片">
+            <div>
+                <img class="preview" style="max-width: 150px; max-height: 150px;">
+                <div class="size"></div>
+            </div>
+            <input type="button" id="photo_send"/>submit
+        </form>
+
+
+
+        <br><br>
+        <p style="font-size:18px;">影片選取</p>
+        <form id="videofile"  action="http://140.123.112.44/timetreasure/public/youtube/upload" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="file" class="file_multi_video" accept="video/*" id="user_icon_file" name="user_icon_file" placeholder="上傳圖片">
+            <video width="200" controls>
+                <source id="video_here">
+            </video><br>
+            <input type="button" id="video_send">submit
+        </form>
+
+        <br><br>
+        <p style="font-size:18px;">音檔選取</p>
+        <form id="audiofile" action="http://140.123.112.44/timetreasure/public/youtube/upload" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="file" id="input" id="user_icon_file" name="user_icon_file" placeholder="上傳圖片" />
+            <audio id="sound"></audio>
+            <input type="button" id="audio_send">submit
+        </form>
+
+    </center>
+
+    <br>
+
+    <script>
+        $(document).on("ready", function () {
+            $("#photo_send").on('click', function () {
+                console.log('dvdvdvdvd');
+                var form = new FormData($('#photofile')[0]);
+                var formdata = new FormData();
+                $.ajax({
+                    type: "POST",	//表單傳送的方式 同 form 的 method 屬性
+                    //contentType: 'application/x-www-form-urlencoded',
+                     url: "http://140.123.112.44/timetreasure/public/youtube/upload",  //目標給哪個檔案 同 form 的 action 屬性
+                    dataType: 'html',//設定該網頁回應的會是 html 格式
+                    data: /*{	//為要傳過去的資料，使用物件方式呈現，因為變數key值為英文的關係，所以用物件方式送。ex: {name : "輸入的名字", password : "輸入的密碼"}
+                             n: $(this).val()	//代表要傳一個 n 變數值為，username 文字方塊裡的值
+                         }*/form,
+                    cache: true,
+                    contentType: false,
+                    processData: false,
+                }).done(function (data) {
+                    switch (data) {
+                        case 'sucessful':
+                            {
+                                alert('上傳完成');
+                                document.location.href = "yn.html";
+                                break;
+                            }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //失敗的時候
+                    alert("有錯誤產生，請看 console log");
+                    console.log(jqXHR.responseText);
+                });
+
+                console.log(form.name);
+            });
+        });
+        </script>
+
+
+    <script>
+       $(document).on("ready", function () {
+           $("#video_send").on('click', function () {
+               console.log('dvdvdvdvd');
+               var form = new FormData($('#videofile')[0]);
+                var formdata = new FormData();
+                $.ajax({
+                    type: "POST",	//表單傳送的方式 同 form 的 method 屬性
+                    //contentType: 'application/x-www-form-urlencoded',
+                    url: "http://140.123.112.44/timetreasure/public/youtube/upload",  //目標給哪個檔案 同 form 的 action 屬性
+                    dataType: 'html',//設定該網頁回應的會是 html 格式
+                    data: /*{	//為要傳過去的資料，使用物件方式呈現，因為變數key值為英文的關係，所以用物件方式送。ex: {name : "輸入的名字", password : "輸入的密碼"}
+                             n: $(this).val()	//代表要傳一個 n 變數值為，username 文字方塊裡的值
+                         }*/form,
+                    cache: true,
+                    contentType: false,
+                    processData: false,
+                }).done(function (data) {
+                    switch (data) {
+                        case 'sucessful':
+                            {
+                                alert('上傳完成');
+                                document.location.href = "yn.html";
+                                break;
+                            }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //失敗的時候
+                    alert("有錯誤產生，請看 console log");
+                    console.log(jqXHR.responseText);
+                });
+
+                //console.log(form.name);
+            });
+        });
+
+    </script>
+
+    <script>
+        $(document).on("ready", function () {
+            $("#audio_send").on('click', function () {
+                console.log('dvdvdvdvd');
+                var form = new FormData($('#audiofile')[0]);
+                var formdata = new FormData();
+                $.ajax({
+                    type: "POST",	//表單傳送的方式 同 form 的 method 屬性
+                   
+                  url: "http://140.123.112.44/timetreasure/public/youtube/upload",  //目標給哪個檔案 同 form 的 action 屬性
+                    dataType: 'html',//設定該網頁回應的會是 html 格式
+                    data: /*{	//為要傳過去的資料，使用物件方式呈現，因為變數key值為英文的關係，所以用物件方式送。ex: {name : "輸入的名字", password : "輸入的密碼"}
+                             n: $(this).val()	//代表要傳一個 n 變數值為，username 文字方塊裡的值
+                         }*/form,
+                    cache: true,
+                    contentType: false,
+                    processData: false,
+                }).done(function (data) {
+                    switch (data) {
+                        case 'sucessful':
+                            {
+                                alert('上傳完成');
+                                document.location.href = "yn.html";
+                                break;
+                            }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //失敗的時候
+                    alert("有錯誤產生，請看 console log");
+                    console.log(jqXHR.responseText);
+                });
+
+                console.log(form.name);
+            });
+        });
+    </script>
+
+
+
+
+
+    <div class="btn pull-right">
+        <a href="yn.html"><button type="button" class="btn btn-primary ">NEXT</button></a>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/TXscript.js"></script>
+    <script type="text/javascript" src="scripts/netdect.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
+
+

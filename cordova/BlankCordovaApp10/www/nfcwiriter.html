@@ -1,0 +1,103 @@
+﻿<<!DOCTYPE html>
+
+<html>
+<head>
+    <!--
+        視需要在下方的中繼標籤中自訂內容安全性原則。將 'unsafe-inline' 加入 default-src 以啟用內嵌 JavaScript。
+        如需詳細資料，請參閱 http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/my_uploads.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-1.12.1.js" integrity="sha256-VuhDpmsr9xiKwvTIHfYWCIQ84US9WqZsLfR4P7qF6O8=" crossorigin="anonymous"></script>
+
+    <title>BlankCordovaApp7</title>
+
+</head>
+<body>
+    <br><br><br><br><br><br>
+    <div id="nfcwriter"><a href="#"><p class="text-center"><button type="button" class="btn2 btn-primary btn-lg">nfc writer</button> </a></div>
+    <br>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script>
+        //var nfcid = ["4","39","-19","74","55","60","-127"];
+        //var srt = nfcid.join();
+        //console.log(srt);
+        var nfcid = '0C001';
+        var test = document.getElementById("nfcwriter");
+
+        /*  if (test)
+          {
+              test.addEventListener('click', function () {
+              nfc.addNdefListener(nfcread, ronSuccess, ronFailure);
+
+
+              });
+
+          }*/
+
+        $(document).on("ready", function () {
+            $("#nfcwriter").on('click', function () {
+                /*
+
+                這裡之後放上ndc讀取程式
+
+                */
+
+                // nfc.removeNdefListener(nfcwriter, onSuccess, onFailure);
+
+                $.ajax({
+                    beforSend: function () {
+                        // httpReq.setRequestHeader('Access-Control-Allow-Headers:*');
+                        //httpReq.setRequestHeader('Access-Control-Allow-Origin:*')
+                    },
+                    type: "POST",	//表單傳送的方式 同 form 的 method 屬性
+                    //contentType: 'application/x-www-form-urlencoded',
+                    url: "http://140.123.112.44/timetreasure/public/nfc",  //目標給哪個檔案 同 form 的 action 屬性
+                    dataType: 'html',//設定該網頁回應的會是 html 格式
+                    data: {	//為要傳過去的資料，使用物件方式呈現，因為變數key值為英文的關係，所以用物件方式送。ex: {name : "輸入的名字", password : "輸入的密碼"}
+                     'id': nfcid,	//代表要傳一個 n 變數值為，username 文字方塊裡的值
+                    },
+                }).done(function (data) {
+                     alert("nfc寫入成功");
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //失敗的時候
+                    alert("nfc讀取失敗，請重新讀取");
+                    console.log(jqXHR.responseText);
+                });
+
+            });
+        });
+        function nfcread(nfcEvent) {
+            alert("sucessful");
+            var tag = nfcEvent.tag;
+            var ndefMessage = tag.id;
+            console.log(ndefMessage);
+            //id = tag.getid();
+            // alert(nfc.bytesToString(tag);
+            alert("nfcid=" + ndefMessage);
+            // alert(nfc.bytesToString(ndefMessage[0].id));
+
+        }
+        function ronSuccess() {
+            console.log("read sucess");
+            //  alert("sucessful+ronSuccess");
+            // alert("http://" + nfc.bytesToString(ndefMessage[0].id));
+        }
+        function ronFailure() {
+
+            console.log("read fail");
+        }
+    </script>
+        <!--script type="text/javascript" src="scripts/nfc.js"></!--script>
+    -->
+</body>
+</html>
+
+

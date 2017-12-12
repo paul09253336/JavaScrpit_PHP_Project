@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!--
+        視需要在下方的中繼標籤中自訂內容安全性原則。將 'unsafe-inline' 加入 default-src 以啟用內嵌 JavaScript。
+        如需詳細資料，請參閱 http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/my_uploads.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-1.12.1.js" integrity="sha256-VuhDpmsr9xiKwvTIHfYWCIQ84US9WqZsLfR4P7qF6O8=" crossorigin="anonymous"></script>
+
+    <title>BlankCordovaApp7</title>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <center>
+            <div class="col-xs-12"><p style="font-size:30px;font-family:DFKai-sb; text-align:center;top:20px;">購買者</p></div>
+        </center>
+    </div>
+
+    <div id="record"><a href="#"><p class="text-center"><button type="button" class="btn2 btn-primary btn-lg">record</button></a></div>
+    <br>
+    <div id="videotest"><a href="#"><p class="text-center"><button type="button" class="btn2 btn-primary btn-lg">video</button></a></div>
+    <br>
+    <div id="audiorecord"><a href="#"><p class="text-center"><button type="button" class="btn2 btn-primary btn-lg">audiorecord</button> </a></div>
+    <br>
+
+    <div ><a href="phonefile.html"><p class="text-center"><button type="button" class="btn2 btn-primary btn-lg">choice phone file</button> </a></div>
+    <br>
+    <center>
+
+      
+
+
+
+         
+
+
+
+
+    <script>
+         $(document).on("ready", function () {
+             $("#password").on('keyup', function () {
+                 if ($(this).val() != '') {
+                     $.ajax({
+                         beforSend: function () {
+                             // httpReq.setRequestHeader('Access-Control-Allow-Headers:*');
+                             //httpReq.setRequestHeader('Access-Control-Allow-Origin:*')
+                         },
+                         type: "POST",	//表單傳送的方式 同 form 的 method 屬性
+                         //contentType: 'application/x-www-form-urlencoded',
+                         url: "http://140.123.112.42/ma/public/Todo",  //目標給哪個檔案 同 form 的 action 屬性
+                         dataType: 'html',//設定該網頁回應的會是 html 格式
+                         data: {	//為要傳過去的資料，使用物件方式呈現，因為變數key值為英文的關係，所以用物件方式送。ex: {name : "輸入的名字", password : "輸入的密碼"}
+                             n: $(this).val()	//代表要傳一個 n 變數值為，username 文字方塊裡的值
+                         },
+
+
+                     }).done(function (data) {
+                              console.log(data); 
+                     }).fail(function (jqXHR, textStatus, errorThrown) {
+                          alert("有錯誤產生，請看 console log");
+                         console.log(jqXHR.responseText);
+                     });
+                     /*   var request = new XMLHttpRequest();
+                        request.open('POST','http://140.123.112.42/laravel/public/',true);*/
+
+
+                 }
+                 else {
+                    //
+                }
+
+             });
+         });
+
+    </script>
+        <script Language="JavaScript">
+
+var x=prompt("請輸入序號",'');
+var s='text';
+ if( x === "")
+{
+alert('序號不能為空');
+     window.location.reload(" clickaction.html ");
+}
+
+else if(x!==s)
+{
+alert('序號輸入錯誤');
+            window.location.reload(" clickaction.html ");
+}
+
+
+        </script> 
+
+     <div class="btn pull-right">
+    <a href="yn.html"><button type="button" class="btn btn-primary ">NEXT</button></a>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/video_pic_audio.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
+
+
